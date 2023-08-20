@@ -26,24 +26,25 @@ Uma API RESTful para gerenciar um e-commerce, construída com Node.js, TypeScrip
 
 ```bash
 git clone https://github.com/manuncorrea/services-ecommerce
-cd seu-repositorio
+cd services-ecommerce
 ```
 2. Instale as dependências:
 
 ```bash
 npm install
+```
 
 1. Configure as variáveis de ambiente no arquivo .env.
 2. Execute as migrações do Prisma
 
 ```bash
 npx prisma migrate dev
-
+```
 1. inicie o servidor:
 
 ```bash
 npm install
-
+```
 ## 🤝 Contribuições
 
 Contribuições são muito bem-vindas! Aqui estão os passos para contribuir:
