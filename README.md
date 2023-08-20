@@ -27,7 +27,7 @@ Uma API RESTful para gerenciar um e-commerce, construída com Node.js, TypeScrip
 ```bash
 git clone https://github.com/manuncorrea/services-ecommerce
 cd seu-repositorio
-
+```
 2. Instale as dependências:
 
 ```bash
