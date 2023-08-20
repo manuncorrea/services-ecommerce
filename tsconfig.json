@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                 // Define a versão do ECMAScript de destino.
+    "module": "commonjs",              // Define o sistema de módulos. Node.js usa "commonjs".
+    "strict": true,                    // Habilita uma série de verificações de tipo rigorosas.
+    "esModuleInterop": true,           // Habilita a interoperabilidade de módulos ES6.
+    "skipLibCheck": true,              // Ignora a verificação de declarações de biblioteca.
+    "forceConsistentCasingInFileNames": true, // Força nomes de arquivos consistentes para evitar problemas em sistemas sensíveis a maiúsculas/minúsculas.
+    "outDir": "./dist",                // Diretório de saída para os arquivos compilados.
+    "rootDir": "./src",                // Diretório raiz onde estão os arquivos TypeScript.
+    "removeComments": true,            // Remove comentários do código compilado.
+    "types": ["node"],                 // Especifica os tipos a serem incluídos.
+    "resolveJsonModule": true,         // Permite a importação de módulos .json.
+    "lib": ["ES2020", "DOM"],          // Bibliotecas de declaração a serem incluídas no processo de compilação.
+    "moduleResolution": "node"         // Estratégia de resolução de módulos.
+  },
+  "include": ["src/**/*.ts"],          // Padrões glob para os arquivos a serem incluídos na compilação.
+  "exclude": ["node_modules"]          // Padrões glob para os arquivos a serem excluídos da compilação.
+}
