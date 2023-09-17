@@ -1,6 +1,7 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import router from './routes/routes';
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -12,10 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 dotenv.config();
 
-// Rotas de teste
-app.get('/', (req: Request, res: Response) => {
-  res.send('Server is ecommerce.');
-});
+app.use(router);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

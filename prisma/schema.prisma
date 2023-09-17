@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
+  id            String     @id @default(uuid())
   email         String     @unique
   password      String
   name          String
@@ -23,7 +23,7 @@ model User {
 }
 
 model Product {
-  id          Int         @id @default(autoincrement())
+  id          String      @id @default(uuid())
   name        String
   description String
   images      String[]
@@ -31,42 +31,42 @@ model Product {
   stock       Int
   isVisible   Boolean
   category    Category    @relation(fields: [categoryId], references: [id])
-  categoryId  Int
+  categoryId  String
   brand       Brand       @relation(fields: [brandId], references: [id])
-  brandId     Int
+  brandId     String
   orderItems  OrderItem[]
   favorites   Favorite[]
   addedBy     User?       @relation("AddedByRelation", fields: [userId], references: [id], map: "addedByProductConstraint")
-  userId      Int?
+  userId      String?
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(uuid())
   name     String    @unique
   products Product[]
 }
 
 model Brand {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(uuid())
   name     String    @unique
   products Product[]
 }
 
 model Order {
-  id     Int         @id @default(autoincrement())
+  id     String      @id @default(uuid())
   date   DateTime    @default(now())
   status OrderStatus
   items  OrderItem[]
-  userId Int
+  userId String
   user   User        @relation(fields: [userId], references: [id])
 }
 
 model OrderItem {
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(uuid())
   order     Order   @relation(fields: [orderId], references: [id])
-  orderId   Int
+  orderId   String
   product   Product @relation(fields: [productId], references: [id])
-  productId Int
+  productId String
   quantity  Int
 }
 
@@ -78,16 +78,16 @@ enum OrderStatus {
 }
 
 model Coupon {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(uuid())
   code       String   @unique
   discount   Float
   validUntil DateTime
 }
 
 model Favorite {
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(uuid())
   user      User    @relation(fields: [userId], references: [id])
-  userId    Int
+  userId    String
   product   Product @relation(fields: [productId], references: [id])
-  productId Int
+  productId String
 }
