@@ -3,8 +3,10 @@ import * as userRoutes from './userRoutes';
 import * as productRoutes from './productRoutes';
 import * as categoryRoutes from './categoryRoutes';
 import * as brandRoutes from './brandRoutes';
+import * as orderRoutes from './orderRoutes'; 
 import { authMiddleware } from '../ middleware/authMiddleware';
 import { validateProductDataMiddleware } from '../ middleware/validateProductDataMiddleware';
+
 
 const router = express.Router();
 
@@ -32,5 +34,11 @@ router.get('/api/brands', brandRoutes.getAll);
 router.get('/api/brands/:id', brandRoutes.get);
 router.put('/api/brands/:id', brandRoutes.update);
 router.delete('/api/brands/:id', brandRoutes.remove);
+
+// Order routes
+router.post('/api/orders', authMiddleware, orderRoutes.create); 
+router.get('/api/orders/:id', authMiddleware, orderRoutes.get); 
+router.put('/api/orders/:id', authMiddleware, orderRoutes.update); 
+router.delete('/api/orders/:id', authMiddleware, orderRoutes.remove); 
 
 export default router;
