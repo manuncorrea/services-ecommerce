@@ -4,6 +4,7 @@ import * as productRoutes from './productRoutes';
 import * as categoryRoutes from './categoryRoutes';
 import * as brandRoutes from './brandRoutes';
 import { authMiddleware } from '../ middleware/authMiddleware';
+import { validateProductDataMiddleware } from '../ middleware/validateProductDataMiddleware';
 
 const router = express.Router();
 
@@ -12,12 +13,11 @@ router.post('/api/register', userRoutes.register);
 router.post('/api/login', userRoutes.login);
 
 // Product routes
-router.post('/api/products', authMiddleware, productRoutes.create); 
+router.post('/api/products', authMiddleware, validateProductDataMiddleware, productRoutes.create); 
 router.get('/api/products/:id', productRoutes.get); 
 router.put('/api/products/:id', authMiddleware, productRoutes.update); 
 router.delete('/api/products/:id', authMiddleware, productRoutes.remove); 
 router.get('/api/products', productRoutes.getAll); 
-
 
 // Category routes
 router.post('/api/categories', categoryRoutes.create);
