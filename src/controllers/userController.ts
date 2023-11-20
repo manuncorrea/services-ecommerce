@@ -1,4 +1,3 @@
-
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -44,4 +43,14 @@ export const loginUser = async ({email, password}: LoginUserParams) => {
   }
 
   return jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+};
+
+export const getAllUsers = async () => {
+  return prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true
+    }
+  });
 };
