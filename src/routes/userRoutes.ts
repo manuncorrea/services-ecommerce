@@ -47,3 +47,13 @@ export const getById = async (req: Request, res: Response) => {
     res.status(500).json({ message: errorMessage });
   }
 };
+
+export const remove = async (req: Request, res: Response) => {
+  try {
+    await userController.deleteUser(req.params.id)
+    res.status(200).json({ message: "User deleted successfully"});
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+    res.status(500).json({ message: errorMessage });
+  }
+};
