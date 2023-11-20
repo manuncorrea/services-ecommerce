@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as userController from '../controllers/userController'; // Adicione esta linha
+import * as userController from '../controllers/userController'; 
 import { RegisterUserParams, LoginUserParams } from '../types/userTypes';
 
 export const register = async (req: Request, res: Response) => {
@@ -28,6 +28,20 @@ export const getAll = async (req: Request, res: Response) => {
   try {
     const users = await userController.getAllUsers();
     res.json(users);
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ message: errorMessage });
+  }
+};
+
+export const getById = async (req: Request, res: Response) => {
+  try {
+    const user = await userController.getUserById(req.params.id);
+    if(user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
   } catch (error) {
     const errorMessage = (error as Error).message;
     res.status(500).json({ message: errorMessage });

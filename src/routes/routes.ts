@@ -15,6 +15,8 @@ const router = express.Router();
 // User routes
 router.post('/api/register', userRoutes.register);
 router.post('/api/login', userRoutes.login);
+router.get('/api/getAll', userRoutes.getAll);
+router.get('/api/users/:id', userRoutes.getById);
 
 // Product routes
 router.post('/api/admin/products', authMiddleware, authorizationMiddleware, validateProductDataMiddleware, productRoutes.create);
