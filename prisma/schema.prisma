@@ -16,17 +16,31 @@ enum UserRole {
 }
 
 model User {
-  id            String     @id @default(uuid())
-  email         String     @unique
-  password      String
-  name          String
-  cpf           String     @unique
-  address       String
-  role          UserRole   @default(USER)
-  orders        Order[]
-  favorites     Favorite[]
-  addedProducts Product[]  @relation("AddedByRelation")
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  name        String
+  cpf         String   @unique
+  addressId   String?  @unique
+  userAddress Address? @relation(fields: [addressId], references: [id])
+  role        UserRole @default(USER)
+  orders      Order[]
+  favorites   Favorite[]
+  addedProducts Product[] @relation("AddedByRelation")
 }
+
+model Address {
+  id      String   @id @default(uuid())
+  street  String
+  number String
+  city    String
+  state   String
+  country String
+  zip     String
+  user    User?    @relation
+  userId  String?  @unique
+}
+
 
 model Product {
   id          String      @id @default(uuid())

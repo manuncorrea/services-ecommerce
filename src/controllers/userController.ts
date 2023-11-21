@@ -14,15 +14,28 @@ export const registerUser = async ({email, password, name, cpf, address}: Regist
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  return prisma.user.create({
+  const newAddress = await prisma.address.create({
+    data: {
+      ...address, 
+    }
+  })
+
+  const user = await prisma.user.create({
     data: {
       email,
       password: hashedPassword,
       name,
       cpf,
-      address
+      addressId: newAddress.id,
     }
   });
+
+  await prisma.address.update({
+    where: { id: newAddress.id },
+    data: { userId: user.id }
+  });
+
+  return user;
 };
 
 export const loginUser = async ({email, password}: LoginUserParams) => {
@@ -59,6 +72,10 @@ export const getUserById = async(userId: string) => {
   return prisma.user.findUnique({
     where: {
       id: userId
+    },
+
+    include: {
+      userAddress: true
     }
   })
 };

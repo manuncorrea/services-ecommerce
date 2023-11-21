@@ -18,6 +18,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string);
+    console.log('Usuário logado:', req.userId);
 
     if (typeof decoded !== 'object' || decoded === null || !('userId' in decoded)) {
       throw new Error('Token is invalid');
