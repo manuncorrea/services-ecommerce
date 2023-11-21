@@ -4,25 +4,28 @@ import { ProductData, UpdatedProductData } from "../types/productTypes";
 const prisma = new PrismaClient();
 
 export const createProduct = async (productData: ProductData) => {
-  const category = await prisma.category.findUnique({ where: { id: productData.categoryId } });
+  const { categoryId, brandId } = productData;
+
+  const category = await prisma.category.findUnique({
+    where: {
+      id: categoryId,
+    },
+  });
   if (!category) {
     throw new Error('Category not found');
   }
 
-  const brand = await prisma.brand.findUnique({ where: { id: productData.brandId } });
+  const brand = await prisma.brand.findUnique({
+    where: {
+      id: brandId,
+    },
+  });
   if (!brand) {
     throw new Error('Brand not found');
   }
 
   return prisma.product.create({
-    data: productData
-  });
-};
-export const getProduct = async (productId: string) => {
-  return prisma.product.findUnique({
-    where: {
-      id: productId
-    }
+    data: productData,
   });
 };
 

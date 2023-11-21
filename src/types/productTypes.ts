@@ -3,6 +3,7 @@ export interface ProductData {
   description: string;
   images: string[];
   price: number; 
+  color: string;
   stock: number;  
   isVisible: boolean; 
   categoryId: string;

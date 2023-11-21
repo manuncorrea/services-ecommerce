@@ -24,7 +24,6 @@ router.get('/api/users/:id/address', userRoutes.getAddress);
 router.post('/api/admin/products', authMiddleware, authorizationMiddleware, validateProductDataMiddleware, productRoutes.create);
 
 router.post('/api/products', authMiddleware, validateProductDataMiddleware, productRoutes.create); 
-router.get('/api/products/:id', productRoutes.get); 
 router.put('/api/products/:id', authMiddleware, productRoutes.update); 
 router.delete('/api/products/:id', authMiddleware, productRoutes.remove); 
 router.get('/api/products', productRoutes.getAll); 
