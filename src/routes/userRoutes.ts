@@ -57,3 +57,19 @@ export const remove = async (req: Request, res: Response) => {
     res.status(500).json({ message: errorMessage });
   }
 };
+
+export const getAddress = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id;
+    const address = await userController.getUserAddress(userId);
+    if (address) {
+      res.json(address);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ message: errorMessage });
+  }
+};
+

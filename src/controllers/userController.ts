@@ -87,3 +87,21 @@ export const deleteUser = async(userId: string) => {
     }
   })
 };
+
+export const getUserAddress = async(userId: string) => {
+  const userWithAddress = await prisma.user.findUnique({
+    where: {
+      id: userId
+    },
+
+    include: {
+      userAddress: true,
+    }
+  });
+
+  if(!userWithAddress) {
+    throw new Error("User not found")
+  }
+
+  return userWithAddress.userAddress
+};

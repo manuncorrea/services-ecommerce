@@ -18,6 +18,7 @@ router.post('/api/login', userRoutes.login);
 router.get('/api/getAll', userRoutes.getAll);
 router.get('/api/users/:id', userRoutes.getById);
 router.delete('/api/users/:id', userRoutes.remove);
+router.get('/api/users/:id/address', userRoutes.getAddress);
 
 // Product routes
 router.post('/api/admin/products', authMiddleware, authorizationMiddleware, validateProductDataMiddleware, productRoutes.create);
